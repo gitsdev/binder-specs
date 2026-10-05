@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><title>Binder Document Matrix</title><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.enf-select option{background:#fff;color:#0b1c30;font-weight:500;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary":"#0c0300","on-primary-fixed":"#0c1b33","on-tertiary":"#ffffff","background":"#f8f9ff","error-container":"#ffdad6","on-primary-fixed-variant":"#394761","error":"#ba1a1a","on-secondary-fixed":"#002113","on-tertiary-fixed-variant":"#733500","tertiary-fixed-dim":"#ffb689","inverse-primary":"#b8c7e6","surface-bright":"#f8f9ff","secondary-fixed-dim":"#7cd9aa","on-primary":"#ffffff","tertiary-fixed":"#ffdbc7","surface-container-highest":"#d3e4fe","surface-dim":"#cbdbf5","on-secondary":"#ffffff","on-tertiary-fixed":"#311300","on-primary-container":"#7886a3","primary-container":"#0f1e36","outline-variant":"#c5c6ce","primary-fixed-dim":"#b8c7e6","secondary-container":"#98f6c5","surface":"#f8f9ff","surface-variant":"#d3e4fe","surface-tint":"#515f7a","inverse-on-surface":"#eaf1ff","on-surface":"#0b1c30","secondary-fixed":"#98f6c5","primary":"#000412","on-secondary-fixed-variant":"#005236","on-error":"#ffffff","on-surface-variant":"#44474d","secondary":"#006c48","on-background":"#0b1c30","inverse-surface":"#213145","primary-fixed":"#d7e3ff","surface-container":"#e5eeff","surface-container-low":"#eff4ff","surface-container-lowest":"#ffffff","on-tertiary-container":"#d16912","outline":"#75777e","on-error-container":"#93000a","tertiary-container":"#351500","surface-container-high":"#dce9ff","on-secondary-container":"#00734d"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-xs":"0.25rem","gutter":"1rem","margin-mobile":"0.75rem","space-md":"0.75rem","margin":"1.5rem","gutter-compact":"0.5rem","space-lg":"1rem","space-sm":"0.5rem","space-xl":"1.5rem"},fontFamily:{"label-lg":["JetBrains Mono"],"headline-xl-mobile":["Hanken Grotesk"],"label-sm":["JetBrains Mono"],"headline-sm":["Hanken Grotesk"],"headline-lg":["Hanken Grotesk"],"body-sm":["Hanken Grotesk"],"body-lg":["Hanken Grotesk"],"headline-md":["Hanken Grotesk"],"headline-xl":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"label-md":["JetBrains Mono"]},fontSize:{"label-lg":["13px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"headline-xl-mobile":["24px",{lineHeight:"30px",letterSpacing:"-0.015em",fontWeight:"700"}],"label-sm":["10px",{lineHeight:"12px",letterSpacing:"0.05em",fontWeight:"500"}],"headline-sm":["15px",{lineHeight:"20px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-lg":["24px",{lineHeight:"30px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-lg":["15px",{lineHeight:"22px",fontWeight:"400"}],"headline-md":["18px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-xl":["32px",{lineHeight:"38px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["13px",{lineHeight:"18px",fontWeight:"400"}],"label-md":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"500"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-surface-container-highest"><div class=""><main class="relative pt-16 bg-surface w-full px-margin"><div class="flex flex-col w-full pb-16">
+<!-- Top KPI & Audit Summary Section -->
+<!-- Main Workspace: Asymmetric 2-Column Desktop Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-xl">
+<!-- LEFT / MAIN COLUMN (68% Equivalent ~ col-span-8) -->
+<div class="flex flex-col gap-space-lg min-w-0 xl:col-span-12">
+<!-- Filter Bar & Search Utility -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Text Search Field -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-9 pr-space-md py-1.5 rounded-lg bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary outline-none transition-all" id="matrix-search" oninput="applyFilters()" placeholder="Search by Document Name, PBS Tag, Statutory Code, or Trigger..." type="text">
+</div>
+<!-- Quick Batch Actions -->
+<div class="flex items-center gap-space-xs shrink-0 flex-wrap">
+<span id="save-indicator" class="font-label-sm text-label-sm text-on-surface-variant font-bold flex items-center gap-1 transition-opacity"><span class="material-symbols-outlined text-[14px]">sync</span>Loading…</span>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1" onclick="exportData()" type="button"><span class="material-symbols-outlined text-[16px]">download</span>Export JSON</button>
+<label class="px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-bold flex items-center gap-1 cursor-pointer"><span class="material-symbols-outlined text-[16px]">upload</span>Import<input accept="application/json,.json" class="hidden" onchange="importData(this)" type="file"></label>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-error-container text-error font-label-sm text-label-sm font-bold flex items-center gap-1" onclick="resetData()" type="button"><span class="material-symbols-outlined text-[16px]">restart_alt</span>Reset</button>
+</div>
+</div>
+<!-- Filter Badges / Segmented Selectors -->
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<button class="filter-chip px-space-md py-1 rounded-lg font-label-sm text-label-sm font-bold transition-all bg-primary-container text-on-primary active-filter shadow-sm" onclick="setFilter('all', this)" type="button">
+            All <span>(<span data-count="all"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-error font-label-sm text-label-sm font-bold transition-all flex items-center gap-1" onclick="setFilter('blocking', this)" type="button">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+            Blocking / Missing <span>(<span data-count="blocking"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-tertiary-container font-label-sm text-label-sm font-bold transition-all flex items-center gap-1" onclick="setFilter('mand-triggered', this)" type="button">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container"></span>
+            Mandatory Triggered <span>(<span data-count="mand-triggered"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold transition-all" onclick="setFilter('mand-all', this)" type="button">
+            Mandatory All <span>(<span data-count="mand-all"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-indigo-700 font-label-sm text-label-sm font-bold transition-all" onclick="setFilter('mand-noncitizen', this)" type="button">
+            Non-Citizens <span>(<span data-count="mand-noncitizen"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium transition-all" onclick="setFilter('not-mandatory', this)" type="button">
+            Not Mandatory <span>(<span data-count="not-mandatory"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-amber-700 font-label-sm text-label-sm font-medium transition-all flex items-center gap-1" onclick="setFilter('pending-cfg', this)" type="button">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+            Pending PBS Cfg <span>(<span data-count="pending-cfg"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-sm text-label-sm font-bold transition-all flex items-center gap-1" onclick="setFilter('approved', this)" type="button">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+            Approved <span>(<span data-count="approved"></span>)</span>
+          </button>
+<button class="filter-chip px-space-md py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium transition-all" onclick="setFilter('unapproved', this)" type="button">
+            Awaiting Approval <span>(<span data-count="unapproved"></span>)</span>
+          </button>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex-1 h-1.5 rounded-full bg-surface-container overflow-hidden"><div id="approval-progress-bar" class="h-full bg-secondary transition-all" style="width:0%"></div></div>
+<span id="approval-progress-label" class="font-label-sm text-label-sm text-on-surface-variant font-mono whitespace-nowrap"></span>
+</div>
+</div>
+<div id="sync-error" class="hidden p-space-md rounded-xl bg-error-container text-on-error-container flex items-center gap-space-sm" role="alert"><span class="material-symbols-outlined text-[18px]">cloud_off</span><span class="flex-1 font-body-sm text-body-sm" data-msg></span><button class="px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-bold" onclick="retrySync()" type="button">Retry</button></div>
+<!-- Comprehensive Interactive Document Matrix Table -->
+<div class="rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden flex flex-col">
+<div class="p-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Document Adjudication Matrix</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface font-mono" id="showing-count-badge"></span>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="">Edit routing &amp; triggers, set enforcement, approve. Changes are shared with everyone.</span>
+</div>
+</div>
+<!-- Scrollable Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm divide-y-0" id="matrix-table">
+<thead>
+<tr class="bg-surface-container font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">
+<th class="py-2.5 px-space-md font-bold"># &amp; Document Name</th>
+<th class="py-2.5 px-space-md font-bold">PBS Category Routing</th>
+<th class="py-2.5 px-space-md font-bold">Trigger Rule Condition</th>
+<th class="py-2.5 px-space-md font-bold text-right">Enforcement Level</th>
+<th class="py-2.5 px-space-md font-bold text-center">Approved</th>
+<th class="py-2.5 px-space-md font-bold text-center"><span class="sr-only">Edit</span></th></tr>
+</thead>
+<tbody class="divide-y-0" id="matrix-body"></tbody>
+</table>
+<datalist id="pbs-categories"></datalist><datalist id="pbs-subcategories"></datalist>
+</div>
+<!-- Table Footer / Pagination Metadata -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-space-md">
+<span class="">Approved rows are locked; unapprove to edit</span>
+<span class="text-outline-variant">•</span>
+<span class="">AHCA Rule 59G-1.050 Compliance Standard</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface font-bold hover:bg-surface-container transition-colors" type="button">Previous</button>
+<span class="px-space-sm py-1 font-mono text-primary font-bold">Page 1 of 1</span>
+<button class="px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface font-bold hover:bg-surface-container transition-colors" disabled="" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Rule Engine Inspector & Dynamic Form Enhancements (32% ~ col-span-4) -->
+<div class="flex flex-col gap-space-lg xl:col-span-12">
+<!-- Card 1: Live Trigger Engine Inputs (Form Enhancements Specification) -->
+<!-- Card 2: PBS Category Routing & Repository Mapping -->
+<!-- Card 3: Pre-Submission Enforcement Logic Summary -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant tracking-wider font-bold">Validation Hierarchy</span>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">Three-Tier Enforcement Logic</h2>
+</div>
+</div>
+<!-- Three Tier Indicators -->
+<div class="flex flex-col gap-space-sm">
+<!-- Tier 1 -->
+<div class="p-space-sm rounded-lg bg-error-container/30 flex items-start gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-error shrink-0 mt-1"></span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-error-container font-bold">Tier 1: Mandatory for All</span>
+<span class="font-body-sm text-body-sm text-on-error-container/85">Statutory baseline under FL Administrative Code. Non-waivable. Blocks binder creation unconditionally if missing.</span>
+</div>
+</div>
+<!-- Tier 2 -->
+<div class="p-space-sm rounded-lg bg-amber-50 text-amber-950 flex items-start gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-600 shrink-0 mt-1"></span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-amber-900 font-bold">Tier 2: Mandatory if Triggered</span>
+<span class="font-body-sm text-body-sm text-amber-900/85">Activated when applicant circumstances match jurisdictional intake rules. Becomes a strict submission gatekeeper.</span>
+</div>
+</div>
+<!-- Tier 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container flex items-start gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-outline shrink-0 mt-1"></span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Tier 3: Not Mandatory (Elective)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Supplemental client records, discretionary briefs, and non-blocking documentation for examiner review.</span>
+</div>
+</div>
+</div>
+<!-- Master Submission Actions -->
+<div class="pt-space-sm flex flex-col gap-space-xs">
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="data/documents.js"></script>
+<script src="app.js"></script></main></div>
+
+</body></html>
