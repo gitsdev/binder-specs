@@ -10,8 +10,18 @@
 const KEY = 'binder:documents';
 const ENFORCEMENT = ['mand-all', 'mand-triggered', 'mand-noncitizen', 'not-mandatory', 'configurable'];
 
-const REDIS_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const REDIS_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+// Vercel's "Connect Store" dialog may add a custom prefix (e.g. STORAGE_KV_REST_API_URL), so match by suffix.
+function env(...suffixes) {
+  for (const suffix of suffixes) {
+    if (process.env[suffix]) return process.env[suffix];
+    const key = Object.keys(process.env).find(k => k.endsWith('_' + suffix) && process.env[k]);
+    if (key) return process.env[key];
+  }
+  return '';
+}
+
+const REDIS_URL = env('KV_REST_API_URL', 'UPSTASH_REDIS_REST_URL');
+const REDIS_TOKEN = env('KV_REST_API_TOKEN', 'UPSTASH_REDIS_REST_TOKEN');
 
 async function redis(path, body) {
   const res = await fetch(REDIS_URL.replace(/\/$/, '') + path, {
@@ -61,7 +71,11 @@ function send(res, status, payload) {
 
 module.exports = async function handler(req, res) {
   if (!REDIS_URL || !REDIS_TOKEN) {
-    return send(res, 500, { error: 'Database not configured. Connect Upstash Redis to this Vercel project.' });
+    const missing = [!REDIS_URL && 'KV_REST_API_URL', !REDIS_TOKEN && 'KV_REST_API_TOKEN'].filter(Boolean).join(' and ');
+    return send(res, 500, {
+      error: 'Database not configured: ' + missing + ' not set for the ' + (process.env.VERCEL_ENV || 'current') +
+        ' environment. Add it in Vercel → Settings → Environment Variables, then redeploy.'
+    });
   }
 
   try {
