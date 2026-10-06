@@ -8,7 +8,7 @@
 //   DELETE /api/documents                                             → clear all edits (reset to seed)
 
 const KEY = 'binder:documents';
-const ENFORCEMENT = ['mand-all', 'mand-triggered', 'mand-noncitizen', 'not-mandatory', 'configurable'];
+const ENFORCEMENT = ['mand-all', 'mand-triggered', 'mand-noncitizen', 'not-mandatory', 'configurable', 'pending-config'];
 
 // Vercel's "Connect Store" dialog may add a custom prefix (e.g. STORAGE_KV_REST_API_URL), so match by suffix.
 function env(...suffixes) {

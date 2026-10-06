@@ -9,7 +9,8 @@
     'mand-triggered':  { label: 'MANDATORY IF TRIGGERED',     icon: 'check_circle',           badge: 'bg-amber-50 text-amber-900 font-bold',       dot: 'bg-amber-600' },
     'mand-noncitizen': { label: 'MANDATORY FOR NON CITIZENS', icon: 'check_circle',           badge: 'bg-indigo-50 text-indigo-900 font-bold',     dot: 'bg-indigo-600' },
     'not-mandatory':   { label: 'NOT MANDATORY',              icon: 'radio_button_unchecked', badge: 'bg-surface-container text-on-surface-variant font-semibold', dot: 'bg-outline' },
-    'configurable':    { label: 'CONFIGURABLE',               icon: 'help_outline',           badge: 'border border-dashed border-outline text-on-surface-variant font-semibold', dot: 'bg-transparent' }
+    'configurable':    { label: 'CONFIGURABLE',               icon: 'help_outline',           badge: 'border border-dashed border-outline text-on-surface-variant font-semibold', dot: 'bg-transparent' },
+    'pending-config':  { label: 'PENDING CONFIGURATION',      icon: 'pending',                badge: 'bg-error text-on-error font-bold',           dot: 'bg-surface-container-lowest' }
   };
 
   const FILTERS = {
@@ -19,7 +20,7 @@
     'mand-all':        d => d.enforcement === 'mand-all',
     'mand-noncitizen': d => d.enforcement === 'mand-noncitizen',
     'not-mandatory':   d => d.enforcement === 'not-mandatory',
-    'pending-cfg':     d => d.routes.length === 0,
+    'pending-cfg':     d => d.routes.length === 0 || d.enforcement === 'pending-config',
     'approved':        d => d.approved,
     'unapproved':      d => !d.approved
   };
@@ -133,17 +134,20 @@
   function viewRow(d) {
     const e = ENFORCEMENT[d.enforcement];
     const pending = d.routes.length === 0;
-    const rowTone = d.approved ? 'bg-secondary-container/20' : pending ? 'bg-error-container/20' : '';
+    const pendingConfig = d.enforcement === 'pending-config';
+    // A row marked Pending Configuration is solid red and wins over the approved tint.
+    const rowTone = pendingConfig ? 'bg-error-container hover:bg-error-container/80 shadow-[inset_4px_0_0_#ba1a1a]'
+      : (d.approved ? 'bg-secondary-container/20' : pending ? 'bg-error-container/20' : '') + ' hover:bg-surface-container-low';
     const dim = d.enforcement === 'not-mandatory' && !d.approved ? ' opacity-75' : '';
-    return '<tr class="matrix-row hover:bg-surface-container-low transition-colors group align-top ' + rowTone + dim + '" data-id="' + d.id + '">' +
+    return '<tr class="matrix-row transition-colors group align-top ' + rowTone + dim + '" data-id="' + d.id + '">' +
       '<td class="py-3 px-space-md"><div class="flex items-start gap-space-xs">' +
-        '<span class="font-mono text-label-sm font-bold mt-0.5 ' + (pending ? 'text-error' : 'text-on-surface-variant') + '">#' + esc(d.id) + '</span>' +
+        '<span class="font-mono text-label-sm font-bold mt-0.5 ' + (pending || pendingConfig ? 'text-error' : 'text-on-surface-variant') + '">#' + esc(d.id) + '</span>' +
         '<div class="flex flex-col gap-0.5"><span class="font-headline-sm text-headline-sm text-primary font-semibold">' + esc(d.name) + '</span>' +
         (isModified(d) ? '<span class="font-label-sm text-label-sm text-on-tertiary-container font-bold uppercase">Edited</span>' : '') +
         '</div></div></td>' +
       '<td class="py-3 px-space-md">' + renderRoutes(d) + '</td>' +
       '<td class="py-3 px-space-md"><div class="inline-flex items-start gap-1 text-on-surface-variant font-body-sm">' +
-        '<span class="material-symbols-outlined text-[14px] mt-px ' + (d.enforcement === 'mand-all' ? 'text-primary' : d.enforcement === 'not-mandatory' || d.enforcement === 'configurable' ? 'text-outline' : 'text-secondary') + '">' + e.icon + '</span>' +
+        '<span class="material-symbols-outlined text-[14px] mt-px ' + (pendingConfig ? 'text-error' : d.enforcement === 'mand-all' ? 'text-primary' : d.enforcement === 'not-mandatory' || d.enforcement === 'configurable' ? 'text-outline' : 'text-secondary') + '">' + e.icon + '</span>' +
         '<span>' + (d.trigger ? esc(d.trigger) : '<em class="text-outline">No trigger rule</em>') + '</span></div></td>' +
       '<td class="py-3 px-space-md text-right">' + enforcementSelect(d) + '</td>' +
       '<td class="py-3 px-space-md text-center"><div class="flex flex-col items-center gap-1">' +
